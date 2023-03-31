@@ -31,7 +31,7 @@ This example repo contains the following examples:
 
 ## Learn more
 
-To learn more about Clerk and Next.js, check out the following resources:
+To learn more about Clerk and Fastify, check out the following resources:
 
 - [@clerk/fastify package README](https://github.com/clerkinc/javascript/blob/main/packages/fastify/README.md)
 - [Clerk Documentation](https://clerk.dev/docs?utm_source=github&utm_medium=starter_repos&utm_campaign=fastify_starter)
