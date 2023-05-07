@@ -16,7 +16,7 @@ const protectedRoutes: FastifyPluginCallback = (instance, opts, done) => {
       return reply.code(403).send();
     }
 
-    const user = userId ? await clerkClient.users.getUser(userId) : null;
+    const user = await clerkClient.users.getUser(userId);
     return { user };
   });
   done();
@@ -24,7 +24,10 @@ const protectedRoutes: FastifyPluginCallback = (instance, opts, done) => {
 
 const publicRoutes: FastifyPluginCallback = (instance, opts, done) => {
   instance.get("/", async (request, reply) => {
-    return { message: "This is a public endpoint. Request /protected to test the Clerk auth middleware" };
+    return {
+      message:
+        "This is a public endpoint. Request /protected to test the Clerk auth middleware",
+    };
   });
   done();
 };
