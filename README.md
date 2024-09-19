@@ -54,7 +54,7 @@ To run the example locally, you need to:
 
 2. Go to the [Clerk dashboard](https://dashboard.clerk.com?utm_source=DevRel&utm_medium=docs&utm_campaign=templates&utm_content=clerk-fastify-quickstart) and create an application.
 
-3. Set the required Clerk environment variables as shown in [the example `env.local.example` file](./.env.local.example).
+3. Set the required Clerk environment variables as shown in [the example `env.example` file](./.env.example).
 
 4. `npm install` the required dependencies.
 
