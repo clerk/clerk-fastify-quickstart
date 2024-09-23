@@ -8,9 +8,17 @@ fastify.register(clerkPlugin);
 
 // Declare a route and access the auth state for this request
 fastify.get("/", async (req, reply) => {
+  // Get userID from JWT passed in Authorization header
   const { userId } = getAuth(req);
-  const user = userId ? await clerkClient.users.getUser(userId) : null;
+
+  if (!userId) {
+    return reply.code(401).send({ error: "Unauthorized request." });
+  }
+
+  const user = await clerkClient.users.getUser(userId);
+
   reply.send({ message: "Authentication state retrieved successfully." });
+
   return { user };
 });
 
