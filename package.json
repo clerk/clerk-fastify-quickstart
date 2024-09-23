@@ -3,19 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "NODE_OPTIONS=--loader=ts-node/esm npx ts-node src/index.ts",
-    "start:runtime-keys": "npx ts-node src/using-runtime-keys.ts",
-    "start:specific-routes": "npx ts-node src/authenticating-specific-routes.ts",
-    "dev": "NODE_OPTIONS=--loader=ts-node/esm nodemon --exec npx ts-node src/index.ts"
+    "start": "tsx watch src/index.ts"
   },
   "dependencies": {
     "@clerk/fastify": "^1.0.45",
     "dotenv": "^16.4.5",
-    "fastify": "^4.28.1"
+    "fastify": "^4.28.1",
+    "tsx": "^4.19.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.6",
-    "ts-node": "^10.9.1",
+    "@types/node": "^22.5.5",
     "typescript": "^5.0.0"
   }
 }
