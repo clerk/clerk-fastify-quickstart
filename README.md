@@ -33,8 +33,10 @@ After following the quickstart you'll have learned how to:
 
 - Install `@clerk/fastify`
 - Set your Clerk API keys
-- Add Clerk's middleware
-- Add `<ClerkProvider />` and Clerk components
+- Configure `clerkPlugin` for all routes
+- Use `getAuth()` to access the current auth state
+- Use `getAuth()` to protect specific routes
+- Configure `clerkPlugin` for specific routes
 
 ## Deploy
 

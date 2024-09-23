@@ -8,13 +8,23 @@ const fastify = Fastify({ logger: true });
 fastify.register(clerkPlugin);
 
 // Declare a route and access the auth state for this request
-fastify.get("/", async (req, reply) => {
+fastify.get("/", async (request, reply) => {
+  const { userId } = getAuth(request);
+  const user = userId ? await clerkClient.users.getUser(userId) : null;
+
+  return reply.send({
+    message: "Authentication state retrieved successfully.",
+    user,
+  });
+});
+
+// Protect a route and return 403 if user is unauthenticated
+fastify.get("/protected", async (request, reply) => {
   try {
-    // Get userID from JWT passed in Authorization header
-    const { userId } = getAuth(req);
+    const { userId } = getAuth(request);
 
     if (!userId) {
-      return reply.code(401).send({ error: "Unauthorized request." });
+      return reply.code(403).send({ error: "Unauthorized request." });
     }
 
     const user = await clerkClient.users.getUser(userId);
@@ -34,9 +44,8 @@ fastify.get("/", async (req, reply) => {
 const start = async () => {
   try {
     await fastify.listen({ port: 8080 });
-    fastify.log.info("Server is running on port 8080.");
-  } catch (err) {
-    fastify.log.error(err);
+  } catch (error) {
+    fastify.log.error(error);
     process.exit(1);
   }
 };
