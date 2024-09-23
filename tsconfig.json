@@ -7,9 +7,5 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
-  },
-  "ts-node": {
-    "transpileOnly": true,
-    "experimentalSpecifierResolution": "node"
   }
 }
