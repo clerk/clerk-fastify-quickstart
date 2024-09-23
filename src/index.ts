@@ -1,3 +1,4 @@
+// dotenv must be imported before @clerk/fastify
 import "dotenv/config";
 import Fastify from "fastify";
 import { clerkClient, clerkPlugin, getAuth } from "@clerk/fastify";
@@ -8,18 +9,26 @@ fastify.register(clerkPlugin);
 
 // Declare a route and access the auth state for this request
 fastify.get("/", async (req, reply) => {
-  // Get userID from JWT passed in Authorization header
-  const { userId } = getAuth(req);
+  try {
+    // Get userID from JWT passed in Authorization header
+    const { userId } = getAuth(req);
 
-  if (!userId) {
-    return reply.code(401).send({ error: "Unauthorized request." });
+    if (!userId) {
+      return reply.code(401).send({ error: "Unauthorized request." });
+    }
+
+    const user = await clerkClient.users.getUser(userId);
+
+    return reply.send({
+      message: "Authentication state retrieved successfully.",
+      user,
+    });
+  } catch (error) {
+    fastify.log.error(error);
+    return reply
+      .code(500)
+      .send({ error: "Failed to retrieve user information." });
   }
-
-  const user = await clerkClient.users.getUser(userId);
-
-  reply.send({ message: "Authentication state retrieved successfully." });
-
-  return { user };
 });
 
 const start = async () => {
