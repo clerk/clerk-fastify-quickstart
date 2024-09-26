@@ -7,37 +7,33 @@ const fastify = Fastify({ logger: true });
 
 fastify.register(clerkPlugin);
 
-// Declare a route and access the auth state for this request
 fastify.get("/", async (request, reply) => {
-  const { userId } = getAuth(request);
-  const user = userId ? await clerkClient.users.getUser(userId) : null;
-
   return reply.send({
-    message: "Authentication state retrieved successfully.",
-    user,
+    message: "This is a public route",
   });
 });
 
-// Protect a route and return 403 if user is unauthenticated
+// A protected route that gets the current user's User object
 fastify.get("/protected", async (request, reply) => {
   try {
+    // Use `getAuth()` to get auth state from the request
     const { userId } = getAuth(request);
 
+    // Protect the route from unauthenticated users
     if (!userId) {
-      return reply.code(403).send({ error: "Unauthorized request." });
+      return reply.code(403).send({ error: "Unauthorized request" });
     }
 
-    const user = await clerkClient.users.getUser(userId);
+    // Use `clerkClient` to access Clerk's Backend SDK methods
+    const user = userId ? await clerkClient.users.getUser(userId) : null;
 
     return reply.send({
-      message: "Authentication state retrieved successfully.",
+      message: "User retrieved successfully",
       user,
     });
   } catch (error) {
     fastify.log.error(error);
-    return reply
-      .code(500)
-      .send({ error: "Failed to retrieve user information." });
+    return reply.code(500).send({ error: "Failed to retrieve user" });
   }
 });
 
