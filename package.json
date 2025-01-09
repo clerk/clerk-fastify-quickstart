@@ -6,13 +6,13 @@
     "start": "tsx watch src/index.ts"
   },
   "dependencies": {
-    "@clerk/fastify": "^1.0.45",
-    "dotenv": "^16.4.5",
-    "fastify": "^4.28.1",
-    "tsx": "^4.19.1"
+    "@clerk/fastify": "^2.1.6",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.2.1",
+    "tsx": "^4.19.2"
   },
   "devDependencies": {
-    "@types/node": "^22.5.5",
-    "typescript": "^5.0.0"
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3"
   }
 }
