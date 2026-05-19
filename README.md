@@ -58,9 +58,9 @@ To run the example locally, you need to:
 
 3. Set the required Clerk environment variables as shown in [the example `env.example` file](./.env.example).
 
-4. `npm install` the required dependencies.
+4. `pnpm install` the required dependencies.
 
-5. `npm run start` to launch the development server.
+5. `pnpm run start` to launch the development server.
 
 ## Learn more
 
